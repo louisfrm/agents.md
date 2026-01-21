@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Carte des fichiers</title>
+    <style>
+      :root {
+        --ink: #1a1a1a;
+        --muted: #5a5a5a;
+        --sun: #f6d13a;
+        --teal: #1fa8a8;
+        --clay: #ee7e51;
+        --sky: #eef3ff;
+        --paper: #fff9f2;
+        --shadow: rgba(0, 0, 0, 0.1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Fraunces", "Georgia", serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 10% 10%, rgba(246, 209, 58, 0.22), transparent 45%),
+          radial-gradient(circle at 90% 20%, rgba(31, 168, 168, 0.18), transparent 50%),
+          linear-gradient(120deg, var(--paper), var(--sky));
+        min-height: 100vh;
+      }
+
+      header {
+        padding: 48px 8vw 28px;
+      }
+
+      h1 {
+        font-size: clamp(2.2rem, 3.8vw, 3.8rem);
+        margin: 0 0 12px;
+        letter-spacing: -0.02em;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        font-family: "Sora", "Trebuchet MS", sans-serif;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        max-width: 720px;
+      }
+
+      main {
+        padding: 0 8vw 64px;
+        display: grid;
+        gap: 28px;
+      }
+
+      .map {
+        display: grid;
+        gap: 18px;
+      }
+
+      .tier {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .card {
+        padding: 18px 20px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: 0 20px 45px var(--shadow);
+        backdrop-filter: blur(8px);
+      }
+
+      .card h2 {
+        margin: 0 0 8px;
+        font-size: 1.1rem;
+        font-family: "Sora", "Trebuchet MS", sans-serif;
+      }
+
+      .card p {
+        margin: 0;
+        font-size: 0.98rem;
+      }
+
+      .pill {
+        display: inline-block;
+        font-family: "Sora", "Trebuchet MS", sans-serif;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 6px 12px;
+        border-radius: 999px;
+        margin-bottom: 10px;
+      }
+
+      .entry {
+        border-left: 4px solid transparent;
+        padding-left: 12px;
+        margin-top: 10px;
+        font-family: "Sora", "Trebuchet MS", sans-serif;
+        font-size: 0.95rem;
+      }
+
+      .entry span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+
+      .highlight {
+        border-color: var(--clay);
+      }
+
+      .wire {
+        height: 32px;
+        border-left: 2px dashed rgba(90, 90, 90, 0.3);
+        margin-left: 24px;
+      }
+
+      .legend {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+      }
+
+      .legend .card {
+        border-left: 4px solid var(--teal);
+      }
+
+      .note {
+        font-family: "Sora", "Trebuchet MS", sans-serif;
+        font-size: 0.92rem;
+        color: var(--muted);
+      }
+
+      @media (max-width: 700px) {
+        header {
+          padding: 36px 6vw 24px;
+        }
+
+        main {
+          padding: 0 6vw 48px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Comment les fichiers s'articulent</h1>
+      <p>
+        Une carte légère du dépôt, montrant comment les dossiers clés, les
+        configurations et les ressources s'alimentent mutuellement. Suivez le flux
+        depuis les points d'entrée jusqu'aux styles, composants UI et assets publics.
+      </p>
+    </header>
+
+    <main>
+      <section class="map">
+        <div class="card">
+          <div class="pill" style="background: var(--sun); color: #3d2d00;">Entrée</div>
+          <h2>Flux des requêtes</h2>
+          <div class="entry highlight">
+            pages/
+            <span>Routes, pages rendues côté serveur et endpoints API.</span>
+          </div>
+          <div class="wire"></div>
+          <div class="entry">
+            components/
+            <span>Blocs UI réutilisables référencés par les pages.</span>
+          </div>
+          <div class="wire"></div>
+          <div class="entry">
+            styles/
+            <span>Styles globaux et définitions de thème.</span>
+          </div>
+        </div>
+
+        <div class="tier">
+          <div class="card">
+            <div class="pill" style="background: var(--teal); color: #003c3c;">Ressources</div>
+            <h2>Fichiers statiques</h2>
+            <div class="entry highlight">
+              public/
+              <span>Images, icônes et fichiers téléchargeables servis tels quels.</span>
+            </div>
+            <div class="entry">
+              assets.html
+              <span>Cette page explicative, stockée avec le code.</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="pill" style="background: var(--clay); color: #4a1d08;">Config</div>
+            <h2>Règles du projet</h2>
+            <div class="entry highlight">
+              next.config.ts
+              <span>Configuration de build et d'exécution pour Next.js.</span>
+            </div>
+            <div class="entry">
+              tsconfig.json
+              <span>Paramètres TypeScript partagés dans l'app.</span>
+            </div>
+            <div class="entry">
+              package.json
+              <span>Scripts et dépendances qui alimentent le projet.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="legend">
+        <div class="card">
+          <h2>Relations en un coup d'œil</h2>
+          <p class="note">
+            Les pages importent des composants, les composants consomment les styles,
+            et les assets vivent dans public pour un accès direct. Les fichiers de
+            configuration pilotent la compilation et le service.
+          </p>
+        </div>
+        <div class="card">
+          <h2>Pourquoi c'est important</h2>
+          <p class="note">
+            Quand vous ajoutez une nouvelle page, vous créez ou réutilisez des
+            composants, branchez les styles partagés et référencez des assets dans
+            public. Un flux clair garde la HMR rapide et prévisible.
+          </p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
