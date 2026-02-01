@@ -36,6 +36,10 @@ If you add or update dependencies remember to:
 | `npm run test`     | Execute the test suite (if present).               |
 | `npm run build`    | **Production build – _do not run during agent sessions_** |
 
+## 5. Commit instructions
+
+* After a commit, perform a `git checkout dev`, and ask user to stop current process and re-run `npm run dev` in terminal.
+
 ---
 
 Following these practices ensures that the agent-assisted development workflow stays
